@@ -70,5 +70,5 @@ def bookings(request):
     return HttpResponse(booking_json, content_type='application/json')
 
 
-
+            
     
