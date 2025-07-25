@@ -14,7 +14,7 @@ from .forms import BookingForm
 
 # Create your views here.
 class HomeView(TemplateView):
-    template_name = 'home.html' 
+    template_name = 'index.html' 
     
 class AboutView(TemplateView):
     template_name = 'about.html'
@@ -29,14 +29,14 @@ class ReservationListView(View):
     
 class BookView(FormView):
     template_name='book.html'
-    form_clases=BookingForm
+    form_class = BookingForm
     
     def form_valid(self, form):
         form.save()
         return self.render_to_response(self.get_context_data(form=form))
     
-class MenuView(View):
-    template_name= 'menu.html'
+class MenuView(TemplateView):
+    template_name = 'menu.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +49,7 @@ class DisplayMenuItemView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk=self.kwargs.get('pk')
-        context["menu_item"] = get_object_or_404(Menu, pk=pk) if pk else '' 
+        context["menu_item"] = get_object_or_404(Menu, pk=pk)
         return context
     
 @method_decorator(csrf_exempt,name='dispatch')
