@@ -63,7 +63,7 @@ class BookingAPI(View):
         data=json.loads(req.body)
         exist= Booking.objects.filter(
             reservation_date=data['reservation_date'],
-            reservaion_slot=data['reservaion_slot']
+            reservation_slot=data['reservation_slot']
         ).exists()
         
         if not exist:
